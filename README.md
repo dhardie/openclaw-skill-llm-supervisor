@@ -1,6 +1,16 @@
 # LLM Supervisor
 
+[![ClawHub](https://img.shields.io/badge/ClawHub-llm--supervisor-blue)](https://clawhub.com/skills/llm-supervisor)
+
 Automatically switches OpenClaw between cloud and local LLMs when rate limits occur — without silently degrading code quality.
+
+## Installation
+
+```bash
+clawhub install llm-supervisor
+```
+
+Or visit: https://clawhub.com/skills/llm-supervisor
 
 ## What this skill does
 
