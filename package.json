@@ -2,9 +2,10 @@
   "name": "llm-supervisor",
   "version": "1.0.0",
   "description": "Automatically switches OpenClaw between cloud and local LLMs when rate limits occur — without silently degrading code quality.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "node --test tests/llm-supervisor.test.mjs"
   },
   "keywords": [],
   "author": "",

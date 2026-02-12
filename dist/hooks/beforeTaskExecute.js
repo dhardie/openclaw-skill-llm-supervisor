@@ -21,7 +21,10 @@ async function beforeTaskExecute(ctx, event) {
     const intent = event.task?.intent;
     if (!intent || !CODE_INTENTS.includes(intent))
         return;
-    const confirmationPhrase = ctx.config.confirmationPhrase;
+    // Skip guard if confirmation not required
+    if (ctx.config.requireConfirmationForCode === false)
+        return;
+    const confirmationPhrase = ctx.config.confirmationPhrase || "CONFIRM LOCAL";
     // Check if user has explicitly confirmed
     const lastUserMessage = event.context?.lastUserMessage || "";
     const confirmed = lastUserMessage
