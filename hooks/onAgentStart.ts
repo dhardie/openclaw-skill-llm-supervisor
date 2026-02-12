@@ -1,11 +1,20 @@
 import { SkillContext, AgentStartEvent } from "@openclaw/sdk";
-import { getState } from "../state";
+import { getState, setState, isCooldownOver } from "../state";
 
 export async function onAgentStart(
   ctx: SkillContext,
   event: AgentStartEvent
 ) {
   const state = getState(ctx);
+
+  // Auto-recover to cloud after cooldown
+  if (state.mode === "local" && isCooldownOver(state, ctx.config.cooldownMinutes ?? 30)) {
+    setState(ctx, { mode: "cloud", since: Date.now() });
+    await ctx.notify.all("✅ Cooldown elapsed — automatically switching back to **cloud LLM**.");
+    ctx.log.info("[llm-supervisor] Auto-recovered to cloud mode after cooldown");
+    event.agent.setLLMProfile("anthropic:default");
+    return;
+  }
 
   if (state.mode === "cloud") {
     // Explicitly ensure cloud provider
