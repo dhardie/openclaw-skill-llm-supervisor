@@ -11,7 +11,9 @@
   ],
   "config": {
     "localModel": "qwen2.5:7b",
-    "requireConfirmationForCode": true
+    "requireConfirmationForCode": true,
+    "confirmationPhrase": "CONFIRM LOCAL",
+    "cooldownMinutes": 30
   },
   "clawhub": {
     "publishable": true,
